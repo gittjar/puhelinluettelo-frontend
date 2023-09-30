@@ -37,14 +37,16 @@ const App = () => {
     });
   }, []);
 
+  
   const addName = (event) => {
     event.preventDefault();
     const existingPerson = persons.find((person) => person.name === newName);
   
     if (existingPerson) {
       setPersonToUpdate(existingPerson);
-      setNewpuhelin(existingPerson.puhelin); // Update phone number
-      setConfirmationMessage(`${newName} is already in the list. Do you want to update the information?`);
+      setNewName(existingPerson.name); // Update the name field
+      setNewpuhelin(existingPerson.puhelin); // Update the phone number field
+      setConfirmationMessage(`${newName} is already in the list. Do you want to update the information? Please give new phonenumber and press YES, if you want change number!`);
       setShowConfirmationDialog(true);
     } else {
       const newPerson = { name: newName, puhelin: newpuhelin };
@@ -54,7 +56,7 @@ const App = () => {
           setNewName('');
           setErrorMessage('');
           setFilteredList([...filteredList, response]);
-          showNotification(`${newName} added to the list with phonenumer: ${newpuhelin}`);
+          showNotification(`${newName} added to the list with phone number: ${newpuhelin}`);
           setNewpuhelin(''); // Clear phone number after showing the notification
         })
         .catch((error) => {
@@ -62,6 +64,8 @@ const App = () => {
         });
     }
   };
+  
+  
   
 
   const handleConfirm = () => {
