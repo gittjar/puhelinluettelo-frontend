@@ -1,6 +1,6 @@
 import React from "react";
 
-const PersonForm = ({ newName, newPhoneNumber, handleNameChange, handlePhoneNumberChange }) => {
+const PersonForm = ({ newName, newpuhelin, handleNameChange, handlepuhelinChange }) => {
   return (
     <div>
         Nimi ja puhelinnumero<br />
@@ -11,8 +11,8 @@ const PersonForm = ({ newName, newPhoneNumber, handleNameChange, handlePhoneNumb
       />
       <input
         placeholder="Puhelinnumero"
-        value={newPhoneNumber}
-        onChange={handlePhoneNumberChange}
+        value={newpuhelin}
+        onChange={handlepuhelinChange}
       />
     </div>
   );

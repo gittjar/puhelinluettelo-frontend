@@ -10,7 +10,7 @@ import ConfirmationDialog from './components/ConfirmationDialog';
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState('');
-  const [newPhoneNumber, setNewPhoneNumber] = useState('');
+  const [newpuhelin, setNewpuhelin] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [filterText, setFilterText] = useState('');
   const [filteredList, setFilteredList] = useState([]);
@@ -40,40 +40,42 @@ const App = () => {
   const addName = (event) => {
     event.preventDefault();
     const existingPerson = persons.find((person) => person.name === newName);
-
+  
     if (existingPerson) {
       setPersonToUpdate(existingPerson);
-      setNewPhoneNumber(existingPerson.phonenumber); // Update phone number
+      setNewpuhelin(existingPerson.puhelin); // Update phone number
       setConfirmationMessage(`${newName} is already in the list. Do you want to update the information?`);
       setShowConfirmationDialog(true);
     } else {
-      const newPerson = { name: newName, phonenumber: newPhoneNumber };
+      const newPerson = { name: newName, puhelin: newpuhelin };
       numberService.create(newPerson)
         .then((response) => {
           setPersons([...persons, response]);
           setNewName('');
           setErrorMessage('');
           setFilteredList([...filteredList, response]);
-          showNotification(`${newName} added to the list with phonenumer: ${newPhoneNumber}`);
-          setNewPhoneNumber(''); // Clear phone number after showing the notification
+          showNotification(`${newName} added to the list with phonenumer: ${newpuhelin}`);
+          setNewpuhelin(''); // Clear phone number after showing the notification
         })
         .catch((error) => {
           console.error('Error saving data:', error);
         });
     }
   };
+  
 
   const handleConfirm = () => {
     setShowConfirmationDialog(false);
     if (personToUpdate) {
-      const updatedPerson = { ...personToUpdate, phonenumber: newPhoneNumber };
+      const updatedPerson = { ...personToUpdate, puhelin: newpuhelin };
       numberService
         .update(personToUpdate.id, updatedPerson)
         .then((response) => {
+          console.log('Updated person data:', response); // Log the updated data
           setPersons(persons.map((person) => (person.id === response.id ? response : person)));
           setFilteredList(filteredList.map((person) => (person.id === response.id ? response : person)));
           setNewName('');
-          setNewPhoneNumber(''); // Clear phone number
+          setNewpuhelin(''); // Clear phone number
           setErrorMessage('');
           setPersonToUpdate(null);
           showNotification(`${newName} updated in the list.`);
@@ -82,12 +84,12 @@ const App = () => {
           console.error('Error updating data:', error);
         });
     } else {
-      const newPerson = { name: newName, phonenumber: newPhoneNumber };
+      const newPerson = { name: newName, puhelin: newpuhelin };
       numberService.create(newPerson)
         .then((response) => {
           setPersons([...persons, response]);
           setNewName('');
-          setNewPhoneNumber(''); // Clear phone number
+          setNewpuhelin(''); // Clear phone number
           setErrorMessage('');
           setFilteredList([...filteredList, response]);
           showNotification(`${newName} added to the list.`);
@@ -107,8 +109,8 @@ const App = () => {
     setNewName(event.target.value);
   };
 
-  const handlePhoneNumberChange = (event) => {
-    setNewPhoneNumber(event.target.value);
+  const handlepuhelinChange = (event) => {
+    setNewpuhelin(event.target.value);
   };
 
   const handleFilterChange = (event) => {
@@ -163,9 +165,9 @@ const App = () => {
           <br />
           <PersonForm
             newName={newName}
-            newPhoneNumber={newPhoneNumber}
+            newpuhelin={newpuhelin}
             handleNameChange={handleNameChange}
-            handlePhoneNumberChange={handlePhoneNumberChange}
+            handlepuhelinChange={handlepuhelinChange}
           />
         </div>
         <div className="add-nappi">
