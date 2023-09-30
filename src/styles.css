@@ -1,0 +1,104 @@
+html {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+.main {
+    background-color: rgb(234, 215, 253);
+    padding: 1%;
+    border-radius: 2%;
+    
+}
+
+.notification-info {
+    color: rgb(6, 149, 68);
+    background: rgb(3, 229, 116);
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 3px rgb(8, 128, 68) solid;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    width: fit-content;
+  }
+
+
+.filter-text {
+    margin-left: 20px;
+}
+
+.inputform {
+    margin-left: 20px
+}
+
+
+
+input {
+    height : 40px;
+    padding: 5px;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    margin: 0.2%;
+}
+
+.add-nappi {
+    margin-top: 1%;
+}
+
+button {
+    font-weight: 700;
+    padding: 12px 12px;
+    text-align: center;
+    border-radius: 10px;
+    cursor: grab;
+    border-top: 10px solid rgb(150, 83, 250);
+    border-bottom: 10px solid rgb(150, 83, 250);
+    background-color: rgb(132, 34, 231);
+}
+
+button:hover {
+    background-color: rgb(194, 135, 252);
+}
+
+.deletebutton {
+    background-color: rgb(28, 9, 45);
+    border: 2px rgb(92, 2, 128) solid;
+    color: azure;
+    padding: 12px 12px;
+}
+.deletebutton:hover {
+    background-color: rgb(56, 56, 55);
+}
+
+.button-confirmation {
+    background-color: rgb(73, 15, 124);
+    border: 2px rgb(92, 2, 128) solid;
+    color: azure;
+    margin: 0.3%;
+}
+.button-confirmation:hover {
+    background-color: rgb(56, 56, 55);
+}
+
+.confirmation-dialog {
+    border: 2px black solid;
+    width: fit-content;
+    padding: 0.5%;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(252, 253, 253);
+    color: black;
+    border-radius: 10px;
+}
+
+
+
+.filtered-list {
+    background-color: rgb(207, 255, 248);
+    padding: 5px;
+    border-radius: 10px;
+    margin-top: 5px;
+    width: fit-content;
+    margin-left: 20px
+}
