@@ -26,7 +26,7 @@ const App = () => {
     setNotification(message);
     setTimeout(() => {
       setNotification(null);
-    }, 10000);
+    }, 4000);
   };
 
   useEffect(() => {
