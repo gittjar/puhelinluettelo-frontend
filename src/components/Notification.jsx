@@ -5,7 +5,6 @@ const Notification = ({ message }) => {
       return null
     }
   
-    
     return (
       <div className="notification-info">
         {message}

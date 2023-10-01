@@ -3,7 +3,7 @@ import React from 'react';
 const Persons = ({ filteredList, handleDelete }) => {
   return (
     <div>
-      <h2>Numbers</h2>
+      <h3>Names and numbers</h3>
       <table>
         <tbody>
           {filteredList.map((person, index) => (
