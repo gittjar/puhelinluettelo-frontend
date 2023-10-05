@@ -2,17 +2,11 @@ html {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-h2 {
-    margin-left: 20px;
-    color: rgb(1, 8, 113);
-}
-
 
 .main {
-    background-color: rgb(234, 216, 252);
+    background-color: rgb(234, 215, 253);
     padding: 1%;
     border-radius: 2%;
-    margin: 0.4%;
     
 }
 
@@ -24,11 +18,22 @@ h2 {
     border: 3px rgb(8, 128, 68) solid;
     border-radius: 5px;
     padding: 10px;
-    margin: 10px;
+    margin: 5px;
+    margin-left: 20px;
     width: fit-content;
   }
 
-
+  .error {
+    background: red;
+    color: white; /* White text color */
+    padding: 10px;
+    margin: 5px;
+    margin-left: 20px;
+    border-radius: 5px;
+    border: 3px solid rgb(145, 7, 7);
+    font-size: 20px;
+    width: fit-content;
+  }
 
 
 .filter-text {
@@ -48,9 +53,6 @@ input {
     border-radius: 10px;
     margin: 0.2%;
 }
-input:hover {
-    border: 2px dashed black;
-    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;}
 
 .add-nappi {
     margin-top: 1%;
@@ -58,7 +60,6 @@ input:hover {
 
 button {
     font-weight: 700;
-    width: 100px;
     padding: 12px 12px;
     text-align: center;
     border-radius: 10px;

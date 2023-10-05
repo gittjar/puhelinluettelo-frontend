@@ -10,7 +10,7 @@ import ConfirmationDialog from './components/ConfirmationDialog';
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState('');
-  const [newpuhelin, setNewpuhelin] = useState('');
+  const [newPhoneNumber, setNewPhoneNumber] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [filterText, setFilterText] = useState('');
   const [filteredList, setFilteredList] = useState([]);
@@ -26,7 +26,7 @@ const App = () => {
     setNotification(message);
     setTimeout(() => {
       setNotification(null);
-    }, 4000);
+    }, 10000);
   };
 
   useEffect(() => {
@@ -37,49 +37,61 @@ const App = () => {
     });
   }, []);
 
-  
   const addName = (event) => {
     event.preventDefault();
     const existingPerson = persons.find((person) => person.name === newName);
   
     if (existingPerson) {
       setPersonToUpdate(existingPerson);
-      setNewName(existingPerson.name); // Update the name field
-      setNewpuhelin(existingPerson.puhelin); // Update the phone number field
-      setConfirmationMessage(`${newName} is already in the list. Do you want to update the information? Please give new phonenumber and press YES, if you want change number!`);
+      setNewPhoneNumber(existingPerson.phonenumber); // Update phone number
+      setConfirmationMessage(`${newName} is already in the list. Do you want to update the information?`);
       setShowConfirmationDialog(true);
     } else {
-      const newPerson = { name: newName, puhelin: newpuhelin };
-      numberService.create(newPerson)
+      const newPerson = { name: newName, phonenumber: newPhoneNumber };
+  
+      // Check if the name is at least 3 characters long
+      if (newPerson.name.length < 3) {
+        setErrorMessage('Name must be at least 3 characters long');
+        return; // Exit early if the name is invalid
+      }
+  
+      // Check if the phone number matches the accepted styles
+      const phoneRegex = /^(09|040|050|044|045)-\d{7,}$/;
+      if (!phoneRegex.test(newPerson.phonenumber)) {
+        setErrorMessage('Phone number must match the accepted styles: 09-1234556 or 040-22334455 for new person!');
+        return; // Exit early if the phone number is invalid
+      }
+      // Validate the phone number using the create function
+      numberService
+        .create(newPerson)
         .then((response) => {
           setPersons([...persons, response]);
           setNewName('');
-          setErrorMessage('');
+          setErrorMessage(''); // Clear any previous error message
           setFilteredList([...filteredList, response]);
-          showNotification(`${newName} added to the list with phone number: ${newpuhelin}`);
-          setNewpuhelin(''); // Clear phone number after showing the notification
+          showNotification(`${newName} added to the list with phone number: ${newPhoneNumber}`);
+          setNewPhoneNumber(''); // Clear phone number after showing the notification
         })
         .catch((error) => {
           console.error('Error saving data:', error);
+          setErrorMessage(error.message); // Set error message from the rejected promise
         });
     }
   };
-  
   
   
 
   const handleConfirm = () => {
     setShowConfirmationDialog(false);
     if (personToUpdate) {
-      const updatedPerson = { ...personToUpdate, puhelin: newpuhelin };
+      const updatedPerson = { ...personToUpdate, phonenumber: newPhoneNumber };
       numberService
         .update(personToUpdate.id, updatedPerson)
         .then((response) => {
-          console.log('Updated person data:', response); // Log the updated data
           setPersons(persons.map((person) => (person.id === response.id ? response : person)));
           setFilteredList(filteredList.map((person) => (person.id === response.id ? response : person)));
           setNewName('');
-          setNewpuhelin(''); // Clear phone number
+          setNewPhoneNumber(''); // Clear phone number
           setErrorMessage('');
           setPersonToUpdate(null);
           showNotification(`${newName} updated in the list.`);
@@ -88,12 +100,12 @@ const App = () => {
           console.error('Error updating data:', error);
         });
     } else {
-      const newPerson = { name: newName, puhelin: newpuhelin };
+      const newPerson = { name: newName, phonenumber: newPhoneNumber };
       numberService.create(newPerson)
         .then((response) => {
           setPersons([...persons, response]);
           setNewName('');
-          setNewpuhelin(''); // Clear phone number
+          setNewPhoneNumber(''); // Clear phone number
           setErrorMessage('');
           setFilteredList([...filteredList, response]);
           showNotification(`${newName} added to the list.`);
@@ -113,8 +125,8 @@ const App = () => {
     setNewName(event.target.value);
   };
 
-  const handlepuhelinChange = (event) => {
-    setNewpuhelin(event.target.value);
+  const handlePhoneNumberChange = (event) => {
+    setNewPhoneNumber(event.target.value);
   };
 
   const handleFilterChange = (event) => {
@@ -169,9 +181,9 @@ const App = () => {
           <br />
           <PersonForm
             newName={newName}
-            newpuhelin={newpuhelin}
+            newPhoneNumber={newPhoneNumber}
             handleNameChange={handleNameChange}
-            handlepuhelinChange={handlepuhelinChange}
+            handlePhoneNumberChange={handlePhoneNumberChange}
           />
         </div>
         <div className="add-nappi">
@@ -179,6 +191,7 @@ const App = () => {
         </div>
       </form>
       <Notification message={notification} />
+      
 
       {showConfirmationDialog && (
         <ConfirmationDialog
@@ -197,6 +210,7 @@ const App = () => {
       )}
 
       {errorMessage && <div className="error">{errorMessage}</div>}
+
       <div className="filtered-list">
         <Persons filteredList={filteredList} handleDelete={handleDelete} />
       </div>
