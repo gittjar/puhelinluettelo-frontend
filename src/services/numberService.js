@@ -10,9 +10,6 @@ const getAll = () => {
 };
 
 const create = (newObject) => {
-  if (newObject.name.length < 3) {
-    return Promise.reject('Vähintään 3 merkkiä pitkä nimi kiitos');
-  }
   const request = axios.post(baseUrl, newObject);
   return request.then((response) => response.data);
 };

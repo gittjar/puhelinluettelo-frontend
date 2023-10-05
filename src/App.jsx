@@ -43,41 +43,42 @@ const App = () => {
   
     if (existingPerson) {
       setPersonToUpdate(existingPerson);
-      setNewPhoneNumber(existingPerson.phonenumber); // Update phone number
-      setConfirmationMessage(`${newName} is already in the list. Do you want to update the information?`);
+      setNewName(existingPerson.name); // Update the name field
+      setNewPhoneNumber(existingPerson.phonenumber); // Update the phone number field
+      setConfirmationMessage(`${newName} is already in the list. Do you want to update the information? Please give a new phone number and press YES if you want to change the number.`);
       setShowConfirmationDialog(true);
     } else {
-      const newPerson = { name: newName, phonenumber: newPhoneNumber };
-  
-      // Check if the name is at least 3 characters long
-      if (newPerson.name.length < 3) {
+      if (newName.length < 3) {
         setErrorMessage('Name must be at least 3 characters long');
-        return; // Exit early if the name is invalid
+        return;
       }
   
-      // Check if the phone number matches the accepted styles
-      const phoneRegex = /^(09|040|050|044|045)-\d{7,}$/;
-      if (!phoneRegex.test(newPerson.phonenumber)) {
-        setErrorMessage('Phone number must match the accepted styles: 09-1234556 or 040-22334455 for new person!');
-        return; // Exit early if the phone number is invalid
+      if (!newPhoneNumber) {
+        setErrorMessage('Phone number is required');
+        return;
       }
-      // Validate the phone number using the create function
-      numberService
-        .create(newPerson)
+  
+      const newPerson = { name: newName, phonenumber: newPhoneNumber };
+      numberService.create(newPerson)
         .then((response) => {
           setPersons([...persons, response]);
           setNewName('');
-          setErrorMessage(''); // Clear any previous error message
+          setErrorMessage('');
           setFilteredList([...filteredList, response]);
           showNotification(`${newName} added to the list with phone number: ${newPhoneNumber}`);
           setNewPhoneNumber(''); // Clear phone number after showing the notification
         })
         .catch((error) => {
           console.error('Error saving data:', error);
-          setErrorMessage(error.message); // Set error message from the rejected promise
+          setErrorMessage('Error saving data. Please check your input and try again.');
         });
     }
   };
+  
+  
+  
+  
+  
   
   
 
