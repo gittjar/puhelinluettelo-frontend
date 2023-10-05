@@ -115,3 +115,45 @@ button:hover {
     width: fit-content;
     margin-left: 20px
 }
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .person-card {
+    border: 1px solid #01668a;
+    border-radius: 5px;
+    padding: 10px;
+    width: 250px;
+    background-color: #72faf1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+  
+  .person-info {
+    margin-bottom: 10px;
+  }
+  .person-id {
+    font-size: 0.7rem;
+  }
+  .person-name {
+    font-weight: 600;
+  }
+  
+  .delete-button {
+    background-color: #ff5555;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .delete-button:hover {
+    background-color: #ff3333;
+  }
+  
