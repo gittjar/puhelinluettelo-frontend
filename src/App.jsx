@@ -21,6 +21,8 @@ const App = () => {
   const [showDeleteConfirmationDialog, setShowDeleteConfirmationDialog] = useState(false);
   const [deleteConfirmationMessage, setDeleteConfirmationMessage] = useState('');
   const [personToDelete, setPersonToDelete] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); // Add this state
+
 
   const showNotification = (message) => {
     setNotification(message);
@@ -31,10 +33,14 @@ const App = () => {
 
   useEffect(() => {
     // Fetch data from the backend when the component mounts
-    numberService.getAll().then((data) => {
-      setPersons(data);
-      setFilteredList(data);
-    });
+    numberService.getAll()
+      .then((data) => {
+        setPersons(data);
+        setFilteredList(data);
+      })
+      .finally(() => {
+        setIsLoading(false); // Set isLoading to false when data is loaded
+      });
   }, []);
 
   const addName = (event) => {
@@ -173,7 +179,12 @@ const App = () => {
 
   return (
     <div className="main">
-      <h2>Phonebook</h2>
+      <h2>Jarno's Phonebook</h2>
+      {isLoading ? ( // Conditional rendering based on isLoading state
+      <span className='loading-data-info'>Ladataan dataa tietokannasta..odota hetkonen!</span>
+    ) : (
+      <>
+
       <div className="filter-text">
         <Filter filterText={filterText} handleFilterChange={handleFilterChange} />
       </div>
@@ -191,8 +202,11 @@ const App = () => {
           <button type="submit">Add +</button>
         </div>
       </form>
+
+      </>
+      )}
+
       <Notification message={notification} />
-      
 
       {showConfirmationDialog && (
         <ConfirmationDialog

@@ -105,6 +105,19 @@ button:hover {
     border-radius: 10px;
 }
 
+.loading-data-info {
+  border: 2px black solid;
+  width: fit-content;
+  padding: 0.5%;
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: rgb(53, 250, 240);
+  color: rgb(3, 112, 131);
+  border-radius: 10px;
+  margin-bottom: 1%;
+}
+
 
 
 .filtered-list {
