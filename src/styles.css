@@ -3,11 +3,19 @@ html {
 }
 
 
+
 .main {
     background-color: rgb(234, 215, 253);
     padding: 1%;
     border-radius: 2%;
-    
+}
+
+.color-line {
+  height: 4px;
+  width: 100%;
+  background-color: rgb(213, 189, 250);
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .notification-info {
@@ -50,8 +58,12 @@ input {
     height : 40px;
     padding: 5px;
     font-size: 1.1rem;
-    border-radius: 10px;
     margin: 0.2%;
+    background-color: #f6fbf6;
+    color: #02332a;
+    border-bottom: 4px solid #c0bcfc;
+    border-left: 0;
+    border-right: 0;
 }
 
 .add-nappi {
@@ -113,9 +125,10 @@ button:hover {
   margin-top: 10px;
   margin-bottom: 10px;
   background-color: rgb(53, 250, 240);
-  color: rgb(3, 112, 131);
+  color: rgb(3, 86, 101);
   border-radius: 10px;
   margin-bottom: 1%;
+  font-size: 0.6rem;
 }
 
 
@@ -168,5 +181,6 @@ button:hover {
   
   .delete-button:hover {
     background-color: #ff3333;
+    color: black;
   }
   

@@ -8,12 +8,13 @@ const Persons = ({ filteredList, handleDelete }) => {
   {filteredList.map((person, index) => (
     <div className="person-card" key={index}>
       <div className="person-info">
+        <i class="fas fa-user"></i>
         <div className='person-id'>ID: {person.id}</div>
         <div className="person-name">Name: {person.name}</div>
         <div>Phonenumber: {person.phonenumber}</div>
       </div>
       <button className="delete-button" onClick={() => handleDelete(person.id)}>
-        Delete
+        Delete 
       </button>
     </div>
   ))}

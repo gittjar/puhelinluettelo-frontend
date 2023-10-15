@@ -178,10 +178,13 @@ const App = () => {
   };
 
   return (
+   
     <div className="main">
-      <h2>Jarno's Phonebook</h2>
+      <h2>Jarno's Phonebook <i class="fas fa-phone"></i>
+ </h2>
       {isLoading ? ( // Conditional rendering based on isLoading state
       <span className='loading-data-info'>Ladataan dataa tietokannasta..odota hetkonen!</span>
+      
     ) : (
       <>
 
@@ -199,8 +202,9 @@ const App = () => {
           />
         </div>
         <div className="add-nappi">
-          <button type="submit">Add +</button>
+          <button type="submit">Add <i class="fas fa-plus"></i></button>
         </div>
+        <section className='color-line'></section>
       </form>
 
       </>
