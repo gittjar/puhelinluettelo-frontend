@@ -72,17 +72,20 @@ input {
 
 button {
     font-weight: 700;
-    padding: 12px 12px;
+    padding: 12px 24px;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 4px;
+    display: inline-block;
+    color: white;
     cursor: grab;
-    border-top: 10px solid rgb(150, 83, 250);
-    border-bottom: 10px solid rgb(150, 83, 250);
+    border-top: 6px solid rgb(150, 83, 250);
+    border-bottom: 6px solid rgb(150, 83, 250);
     background-color: rgb(132, 34, 231);
 }
 
 button:hover {
-    background-color: rgb(194, 135, 252);
+    background-color: transparent;
+    color: rgb(132, 34, 231);
 }
 
 .deletebutton {
